@@ -10,7 +10,12 @@ public enum LottoConfigEnum {
     LOTTO_MIN_NUMBER(1),
     LOTTO_MAX_NUMBER(45),
     LOTTO_MAX_LENGTH(6),
-    LOTTO_PRICE(1000);
+    LOTTO_PRICE(1000),
+
+    FIRST_CORRECT_COUNT(6),
+    SECOND_CORRECT_COUNT(5),
+    THIRD_CORRECT_COUNT(4),
+    FOURTH_CORRECT_COUNT(3);
 
     final private int number;
 

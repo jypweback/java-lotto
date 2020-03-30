@@ -7,11 +7,11 @@ import java.util.List;
  * Github : http://github.com/jypweback
  * Description :
  */
-public class Lotto {
+public class UserLotto {
 
     private List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers){
+    public UserLotto(List<Integer> lottoNumbers){
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -19,4 +19,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    @Override
+    public String toString() {
+        return "UserLotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 }

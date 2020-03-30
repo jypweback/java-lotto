@@ -1,13 +1,9 @@
 package com.lotto;
 
-import com.lotto.config.LottoConfigEnum;
-import com.lotto.domain.Lotto;
+import com.lotto.domain.UserLotto;
+import com.lotto.domain.LottoGameBuilder;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.IntStream;
 
 /**
  * Created by qkrwpdud1@gmail.com on 2020/03/23
@@ -18,12 +14,20 @@ import java.util.stream.IntStream;
 public class Main {
     public static void main(String[] args) {
 
+        /**
+         * 사용자 금액 입력
+         * 사용자 로또번호 출력
+         * 당첨번호 입력
+         * 당첨금 결과 확인
+         */
 
-//        List<Integer> numbers = new ArrayList<>();
-//        Random random = new Random();
-//
-//        IntStream lottoNumbers = IntStream.range(1, 45);
-//        lottoNumbers.forEach(number -> System.out.println(number));
+//        int money =  14000;
+//        LottoGameBuilder.setup(money);
+
+
+
+
+
 
 
     }
