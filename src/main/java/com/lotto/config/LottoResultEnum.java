@@ -1,19 +1,72 @@
 package com.lotto.config;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 /**
- * Created by qkrwpdud1@gmail.com on 2020/03/30
+ * Created by qkrwpdud1@gmail.com on 2020/03/31
  * Github : http://github.com/jypweback
  * Description :
  */
 public enum LottoResultEnum {
-    FIRST_PLACE(0),
-    SECOND_PLACE(0),
-    THIRD_PLACE(0),
-    FOURTH_PLACE(0);
 
-    final int count;
+    FIRST(1, 6, 2000000000, 0),
+    SECOND(2, 5, 1500000, 0),
+    THIRD(3, 4, 50000, 0),
+    FOURTH(4, 3, 5000, 0);
 
-    LottoResultEnum(int count) {
-        this.count = count;
+    private static final int ADD_COUNT_NUM = 1;
+    private static final int DECIMAL_FLOOR = 100;
+
+    private final int ranking;
+    private final int winningCount;
+    private final int price;
+    private int userWinningCount;
+
+    LottoResultEnum(int ranking, int winningCount, int price, int userWinningCount) {
+        this.ranking = ranking;
+        this.winningCount = winningCount;
+        this.price = price;
+        this.userWinningCount = userWinningCount;
+    }
+
+
+    public int getRanking() {
+        return this.ranking;
+    }
+
+    public int getWinningCount() {
+        return this.winningCount;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public int getUserWinningCount() {
+        return this.userWinningCount;
+    }
+
+    public static void addUserWinningCount(final int userWinningCount) {
+        Arrays.stream(LottoResultEnum.values())
+                .filter(e -> e.getWinningCount() == userWinningCount)
+                .forEach(e -> {
+                    e.userWinningCount += ADD_COUNT_NUM;
+                });
+    }
+
+    public static double getLottoEarningsRate(int money) {
+        double rate = getTotalPrice() / money;
+        return cutDecimalPlace(rate);
+    }
+
+    public static double getTotalPrice() {
+        return Arrays.stream(LottoResultEnum.values())
+                .mapToInt(e -> e.getPrice() * e.getUserWinningCount())
+                .sum();
+    }
+
+    public static double cutDecimalPlace(double rate) {
+        return (int) (rate * DECIMAL_FLOOR) / (double) DECIMAL_FLOOR;
     }
 }

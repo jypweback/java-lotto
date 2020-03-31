@@ -21,8 +21,6 @@ public class UserLotto {
 
     @Override
     public String toString() {
-        return "UserLotto{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
+        return lottoNumbers.toString();
     }
 }

@@ -1,34 +1,31 @@
 package com.lotto;
 
-import com.lotto.domain.UserLotto;
 import com.lotto.domain.LottoGameBuilder;
+import com.lotto.domain.LottoGameResult;
+import com.lotto.domain.UserLotto;
+import com.lotto.domain.WinningLotto;
+import com.lotto.view.InputView;
+import com.lotto.view.ResultView;
 
 import java.util.List;
 
 /**
  * Created by qkrwpdud1@gmail.com on 2020/03/23
  * Github : http://github.com/jypweback
- * Description :
+ * Description : Main
  */
 
 public class Main {
     public static void main(String[] args) {
 
-        /**
-         * 사용자 금액 입력
-         * 사용자 로또번호 출력
-         * 당첨번호 입력
-         * 당첨금 결과 확인
-         */
+        int money = InputView.inputMoney();
+        List<UserLotto> userLottos = LottoGameBuilder.setup(money);
+        ResultView.resultUserLotto(userLottos);
 
-//        int money =  14000;
-//        LottoGameBuilder.setup(money);
+        WinningLotto winningLotto = InputView.inputWinningLottoNumbers();
 
-
-
-
-
-
+        LottoGameResult.result(userLottos, winningLotto);
+        ResultView.resultLotto(money);
 
     }
 }

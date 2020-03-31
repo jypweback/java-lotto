@@ -15,14 +15,12 @@ public class LottoGameBuilder {
 
     private LottoGameBuilder(){}
 
-    private static List<UserLotto> userLotto;
-
-    public static void setup(int money){
+    public static List<UserLotto> setup(int money){
 
         if(money < LottoConfigEnum.LOTTO_PRICE.get())
             throw new IllegalArgumentException("천원 이상 금액을 입력하세요!");
 
-        userLotto = createUserLotto(getPossibilityLottoCount(money));
+        return createUserLotto(getPossibilityLottoCount(money));
     }
 
     public static int getPossibilityLottoCount(int money){
@@ -40,9 +38,5 @@ public class LottoGameBuilder {
         }
 
         return userLottos;
-    }
-
-    public static List<UserLotto> getUserLotto() {
-        return userLotto;
     }
 }

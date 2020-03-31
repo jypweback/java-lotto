@@ -1,5 +1,7 @@
 package com.lotto.domain;
 
+import com.lotto.config.LottoResultEnum;
+
 import java.util.List;
 
 /**
@@ -9,12 +11,21 @@ import java.util.List;
  */
 public class LottoGameResult {
 
-    public static void result(List<UserLotto> userLottoList, WinningLotto winningLotto){
+    public static void result(final List<UserLotto> userLottos, final WinningLotto winningLotto){
+        userLottos.stream()
+                .forEach( userLotto -> {
+                    LottoResultEnum.addUserWinningCount(getWinningCount(userLotto, winningLotto));
+                });
 
-//        userLottoList.stream().forEach(
-//                lotto -> lotto.getLottoNumbers().stream().anyMatch(winningLotto.getLottoNumbers())
-//        );
+    }
 
+    public static int getWinningCount(UserLotto userLotto, WinningLotto winningLotto){
+
+        return (int)userLotto
+                .getLottoNumbers()
+                .stream()
+                .filter(uNum -> winningLotto.getLottoNumbers().contains(uNum))
+                .count();
 
     }
 
