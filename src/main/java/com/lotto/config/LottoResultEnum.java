@@ -1,19 +1,18 @@
 package com.lotto.config;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 /**
  * Created by qkrwpdud1@gmail.com on 2020/03/31
  * Github : http://github.com/jypweback
- * Description :
+ * Description : 로또게임 결과 열거형
  */
 public enum LottoResultEnum {
 
-    FIRST(1, 6, 2000000000, 0),
-    SECOND(2, 5, 1500000, 0),
-    THIRD(3, 4, 50000, 0),
-    FOURTH(4, 3, 5000, 0);
+    FIRST(1, 6, 2_000_000_000, 0),
+    SECOND(2, 5, 1_500_000, 0),
+    THIRD(3, 4, 50_000, 0),
+    FOURTH(4, 3, 5_000, 0);
 
     private static final int ADD_COUNT_NUM = 1;
     private static final int DECIMAL_FLOOR = 100;
@@ -29,7 +28,6 @@ public enum LottoResultEnum {
         this.price = price;
         this.userWinningCount = userWinningCount;
     }
-
 
     public int getRanking() {
         return this.ranking;
@@ -56,11 +54,11 @@ public enum LottoResultEnum {
     }
 
     public static double getLottoEarningsRate(int money) {
-        double rate = getTotalPrice() / money;
+        double rate = (double) getTotalPrice() / money;
         return cutDecimalPlace(rate);
     }
 
-    public static double getTotalPrice() {
+    public static int getTotalPrice() {
         return Arrays.stream(LottoResultEnum.values())
                 .mapToInt(e -> e.getPrice() * e.getUserWinningCount())
                 .sum();
@@ -68,5 +66,10 @@ public enum LottoResultEnum {
 
     public static double cutDecimalPlace(double rate) {
         return (int) (rate * DECIMAL_FLOOR) / (double) DECIMAL_FLOOR;
+    }
+
+    public static void clear() {
+        Arrays.stream(LottoResultEnum.values())
+                .forEach(e -> e.userWinningCount = 0);
     }
 }

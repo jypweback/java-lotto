@@ -3,6 +3,8 @@ package com.lotto.view;
 import com.lotto.domain.WinningLotto;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -14,24 +16,43 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String SPLIT_STRING = ",";
+    private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자만 입력 가능합니다.";
 
     public static int inputMoney() {
 
-        System.out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        while (true) {
+            try {
+                System.out.println("\n구입금액을 입력해 주세요.");
+                Scanner scanner = new Scanner(System.in);
+                return scanner.nextInt();
+            } catch (InputMismatchException ex) {
+                System.out.println(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+                continue;
+            } catch (RuntimeException runtimeException) {
+                throw new RuntimeException();
+            }
+        }
     }
 
     public static WinningLotto inputWinningLottoNumbers() {
 
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        String winningLotto = scanner.next();
-        return new WinningLotto(
-                Arrays.stream(winningLotto.split(SPLIT_STRING))
-                        .map(n -> Integer.parseInt(n))
-                        .collect(Collectors.toList())
-        );
+        while (true) {
+            System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+            Scanner scanner = new Scanner(System.in);
+            String winningLotto = scanner.nextLine().replace(" ", "");
+
+            try {
+
+                List<Integer> numbers = Arrays.stream(winningLotto.split(SPLIT_STRING))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
+
+                return new WinningLotto(numbers);
+            } catch (NumberFormatException exception) {
+                System.out.println(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+                continue;
+            }
+        }
     }
 
 }

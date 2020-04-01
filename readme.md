@@ -27,6 +27,12 @@
 - https://edu.nextstep.camp
 - https://book.naver.com/bookdb/book_detail.nhn?bid=12236206 (윤성우 열혈 Java 프로그래밍)
 
+## 결과
+- 1단계 완료
+- 2단계 진행
+- 3단계 대기
+- 4단계 대기
+
 
 
 

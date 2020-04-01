@@ -13,27 +13,28 @@ import java.util.List;
 
 public class LottoGameBuilder {
 
-    private LottoGameBuilder(){}
+    private LottoGameBuilder() {
+    }
 
-    public static List<UserLotto> setup(int money){
+    public static List<UserLotto> setup(int money) {
 
-        if(money < LottoConfigEnum.LOTTO_PRICE.get())
+        if (money < LottoConfigEnum.LOTTO_PRICE.get())
             throw new IllegalArgumentException("천원 이상 금액을 입력하세요!");
 
         return createUserLotto(getPossibilityLottoCount(money));
     }
 
-    public static int getPossibilityLottoCount(int money){
-        return (int)Math.floor(money / LottoConfigEnum.LOTTO_PRICE.get());
+    public static int getPossibilityLottoCount(int money) {
+        return (int) Math.floor(money / LottoConfigEnum.LOTTO_PRICE.get());
     }
 
-    public static List<UserLotto> createUserLotto(int buyTicketCount){
+    public static List<UserLotto> createUserLotto(int buyTicketCount) {
 
         List<UserLotto> userLottos = new ArrayList<>();
 
-        for(int i = 0; i < buyTicketCount; i++){
+        for (int i = 0; i < buyTicketCount; i++) {
             userLottos.add(
-                new UserLotto(LottoNumberGenerator.getLottoNumbers())
+                    new UserLotto(LottoNumberGenerator.getLottoNumbers())
             );
         }
 

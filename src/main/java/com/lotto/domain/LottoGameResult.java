@@ -11,17 +11,17 @@ import java.util.List;
  */
 public class LottoGameResult {
 
-    public static void result(final List<UserLotto> userLottos, final WinningLotto winningLotto){
+    public static void result(final List<UserLotto> userLottos, final WinningLotto winningLotto) {
+
         userLottos.stream()
-                .forEach( userLotto -> {
+                .forEach(userLotto -> {
                     LottoResultEnum.addUserWinningCount(getWinningCount(userLotto, winningLotto));
                 });
-
     }
 
-    public static int getWinningCount(UserLotto userLotto, WinningLotto winningLotto){
+    public static int getWinningCount(UserLotto userLotto, WinningLotto winningLotto) {
 
-        return (int)userLotto
+        return (int) userLotto
                 .getLottoNumbers()
                 .stream()
                 .filter(uNum -> winningLotto.getLottoNumbers().contains(uNum))
